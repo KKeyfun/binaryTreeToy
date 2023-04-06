@@ -33,20 +33,10 @@ class Tree {
 
 function buildTree(arr){
     const filtered = [...new Set(arr)]; // Remove duplicate results from initial array
-    // let mid = Math.floor(arr.length/2);
-    // if(mid<1){
-    //     return null;
-    // }
-
-    // let node = new Node(arr[mid]);
-    
-    // node.left = buildTree(arr.slice(0,mid-1));
-    // node.right = buildTree(arr.slice(mid+1));
-    // return node;
 
     let root = new Node(filtered[0]);
     
-    for(let i=1;i<filtered.length;i++){//changed i=1 -> i=0
+    for(let i=1;i<filtered.length;i++){
         buildTreeAux(root,filtered[i]);
     }
     
@@ -54,6 +44,7 @@ function buildTree(arr){
 }
 
 function buildTreeAux(node,value){
+    // Trying to make self balancing
     if(value<node.data && !node.left){
         node.left = new Node(value);
     } else if(value>node.data && !node.left){
@@ -61,6 +52,7 @@ function buildTreeAux(node,value){
         newRoot.left = node;
         node = newRoot;//
         return node;//
+    //
     }else if(value<node.data){
         if(node.left){
             buildTreeAux(node.left,value);
