@@ -275,3 +275,27 @@ function display(fxn,desc,expect){
     document.body.appendChild(div);
     document.body.appendChild(document.createElement('br'));
 }
+
+function generateRandomTree(){
+    const arr = [];
+    for(let i=0;i<21;i++){
+        arr.push(Math.floor(Math.random() * 12345));
+    }
+    console.log(arr);
+    const randTree = new Tree(arr);
+    prettyPrint(randTree.root);
+    console.log(`randTree balanced?: ${randTree.isBalanced()}`);
+    for(let i=0;i<100;i++){
+        randTree.insert(Math.floor(Math.random() * 12345));
+    }
+    console.log(`randTree balanced after 100 inserts?: ${randTree.isBalanced()}`);
+    prettyPrint(randTree.root);
+    randTree.rebalance();
+    console.log(`randTree balanced after rebalance?: ${randTree.isBalanced()}`);
+    prettyPrint(randTree.root);
+    console.log(randTree.levelOrder());
+    console.log(randTree.preOrder());
+    console.log(randTree.inOrder());
+    console.log(randTree.postOrder());
+}
+generateRandomTree();
